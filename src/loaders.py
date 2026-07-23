@@ -80,7 +80,10 @@ def load_documents(data_dir: Path = DATA_DIR) -> list[Document]:
     documents: list[Document] = []
 
     for pdf_path in pdf_files:
-        print(f"Loading: {pdf_path.name}")
-        documents.extend(load_pdf(pdf_path))
+        pdf_documents = load_pdf(pdf_path)
+        documents.extend(pdf_documents)
+
+        print(f"Loaded: {pdf_path.name}")
+        print(f"Pages: {len(pdf_documents)}")
 
     return documents
