@@ -1,0 +1,23 @@
+# Python
+__pychache__/
+*.pyc
+
+# Virtual Environments
+.venv/
+venv
+
+# Environmental Variables
+.env
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_store
+
+# Chroma database
+chroma_db/
+
+# Data Files
+data/*
+!data/.gitkeep
