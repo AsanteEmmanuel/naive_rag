@@ -8,6 +8,7 @@ from langchain_text_splitters import CharacterTextSplitter
 from src.config import (
     FIXED_CHUNK_OVERLAP,
     FIXED_CHUNK_SIZE,
+    MIN_CHUNK_SIZE,
 )
 
 
@@ -38,6 +39,34 @@ def validate_chunk_settings(
         raise ValueError(
             "chunk_overlap must be smaller than chunk_size."
         )
+
+
+def filter_small_chunks(
+    chunks: list[Document],
+    minimum_size: int = MIN_CHUNK_SIZE,
+) -> tuple[list[Document], int]:
+    """
+    Remove chunks that are too small to provide useful retrieval context.
+
+    Args:
+        chunks: Chunk-level documents.
+        minimum_size: Minimum number of non-whitespace characters required.
+
+    Returns:
+        A tuple containing the retained chunks and removal count.
+    """
+    if minimum_size < 0:
+        raise ValueError("minimum_size cannot be negative.")
+
+    filtered_chunks = [
+        chunk
+        for chunk in chunks
+        if len(chunk.page_content.strip()) >= minimum_size
+    ]
+
+    removed_count = len(chunks) - len(filtered_chunks)
+
+    return filtered_chunks, removed_count
 
 
 def fixed_size_chunking(
@@ -77,11 +106,24 @@ def fixed_size_chunking(
 
     chunks = splitter.split_documents(documents)
 
+    chunks, removed_count = filter_small_chunks(
+        chunks,
+        minimum_size=MIN_CHUNK_SIZE,
+    )
+
+    print(
+        f"Removed {removed_count} chunks shorter than "
+        f"{MIN_CHUNK_SIZE} characters"
+    )
+
     for chunk_index, chunk in enumerate(chunks):
+        cleaned_content = chunk.page_content.strip()
+        chunk.page_content = cleaned_content
+
         chunk.metadata.update(
             {
                 "chunk_index": chunk_index,
-                "character_count": len(chunk.page_content),
+                "character_count": len(cleaned_content),
                 "chunking_strategy": "fixed_size",
             }
         )
@@ -92,6 +134,7 @@ def fixed_size_chunking(
 CHUNKING_STRATEGIES: dict[str, ChunkingFunction] = {
     "fixed_size": fixed_size_chunking
 }
+
 
 
 def chunk_documents(

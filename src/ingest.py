@@ -10,6 +10,7 @@ from src.config import (
     CHUNKING_STRATEGY,
     FIXED_CHUNK_OVERLAP,
     FIXED_CHUNK_SIZE,
+    MIN_CHUNK_SIZE,
 )
 from src.loaders import load_documents
 
@@ -166,6 +167,10 @@ def main() -> None:
         print(
             f"Chunk overlap: "
             f"{FIXED_CHUNK_OVERLAP} characters"
+        )
+        print(
+            f"Minimum chunk size: "
+            f"{MIN_CHUNK_SIZE} characters"
         )
 
     print_source_summary(

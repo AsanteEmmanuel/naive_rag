@@ -18,6 +18,7 @@ CHUNKING_STRATEGY = "fixed_size"
 # Fixed-size chunking configuration.
 FIXED_CHUNK_SIZE = 1000
 FIXED_CHUNK_OVERLAP = 200
+MIN_CHUNK_SIZE = 100
 
 # Recursive Chunking Strategy
 RECURSIVE_CHUNK_SIZE = 1000
