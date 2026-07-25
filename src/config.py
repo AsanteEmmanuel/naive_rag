@@ -23,3 +23,10 @@ MIN_CHUNK_SIZE = 100
 # Recursive Chunking Strategy
 RECURSIVE_CHUNK_SIZE = 1000
 RECURSIVE_CHUNK_OVERLAP = 200
+
+# Embedding configuration.
+EMBEDDING_PROVIDER = "openai"
+EMBEDDING_MODEL = "text-embedding-3-small"
+
+# Number of documents used for the initial embedding test.
+EMBEDDING_TEST_BATCH_SIZE = 5
