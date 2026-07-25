@@ -30,3 +30,8 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 
 # Number of documents used for the initial embedding test.
 EMBEDDING_TEST_BATCH_SIZE = 5
+
+
+# Vector database configuration.
+CHROMA_COLLECTION_NAME = "ghana_government_documents"
+CHROMA_PERSIST_DIRECTORY = "chroma_db"

@@ -106,14 +106,9 @@ def fixed_size_chunking(
 
     chunks = splitter.split_documents(documents)
 
-    chunks, removed_count = filter_small_chunks(
+    chunks, _ = filter_small_chunks(
         chunks,
         minimum_size=MIN_CHUNK_SIZE,
-    )
-
-    print(
-        f"Removed {removed_count} chunks shorter than "
-        f"{MIN_CHUNK_SIZE} characters"
     )
 
     for chunk_index, chunk in enumerate(chunks):

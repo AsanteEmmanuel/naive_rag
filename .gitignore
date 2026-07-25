@@ -21,3 +21,6 @@ chroma_db/
 # Data Files
 data/*
 !data/.gitkeep
+
+# Local Chroma vector database
+chroma_db/
