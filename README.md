@@ -14,3 +14,8 @@ A Retrieval-Augmented Generation (RAG) project built from scratch using:
 - Understand document loading, chunking, embeddings, retrieval, and generation
 
 This project is being built incrementally with clear Git commits.
+
+
+## Architecture
+
+See [docs/architecture.md](docs/architecture.md) for the system architecture, module responsibilities, completed milestones, and planned RAG pipeline.
